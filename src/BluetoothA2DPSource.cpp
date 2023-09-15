@@ -536,10 +536,11 @@ void BluetoothA2DPSource::bt_app_gap_callback(esp_bt_gap_cb_event_t event,
     break;
 
 #ifdef ESP_IDF_4
+#ifdef ESP_BT_GAP_ACL_CONN_CMPL_STAT_EVT
   case ESP_BT_GAP_ACL_CONN_CMPL_STAT_EVT:
     ESP_LOGI( BT_AV_TAG,"ESP_BT_GAP_ACL_CONN_CMPL_STAT_EVT");
     break;
-
+#endif
   case ESP_BT_GAP_MODE_CHG_EVT:
     ESP_LOGI(BT_AV_TAG, "ESP_BT_GAP_MODE_CHG_EVT mode:%d",
              param->mode_chg.mode);
@@ -966,8 +967,8 @@ void BluetoothA2DPSource::bt_av_hdl_avrc_ct_evt(uint16_t event, void *p_param) {
   case ESP_AVRC_CT_PASSTHROUGH_RSP_EVT: {
     ESP_LOGI(
         BT_RC_CT_TAG,
-        "AVRC passthrough response: key_code 0x%x, key_state %d, rsp_code %d",
-        rc->psth_rsp.key_code, rc->psth_rsp.key_state, rc->psth_rsp.rsp_code);
+        "AVRC passthrough response: key_code 0x%x, key_state %d",
+        rc->psth_rsp.key_code, rc->psth_rsp.key_state);
     break;
   }
   /* when metadata responsed, this event comes */
